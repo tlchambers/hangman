@@ -41,6 +41,18 @@ const displayOptions = () => {
   optionsContainer.appendChild(buttonCon);
 };
 
+const blocker = () => {
+  let optionsButtons = document.querySelectorAll(".options");
+  let letterButtons = document.querySelectorAll(".letters");
+  optionsButtons.forEach((button) => {
+    button.disabled = true;
+  });
+  letterButtons.forEach((button) => {
+    button.disabled = true;
+  });
+  newGameContainer.classList.remove("hide")
+};
+
 const generateWord = (optionValue) => {
   let optionsButtons = document.querySelectorAll(".options");
   // if optionValue matches the button innerText then highlight the button
@@ -61,35 +73,46 @@ const generateWord = (optionValue) => {
   console.log(chosenWord);
 
   // replace every letter with span containing dash
-  let displayItem = chosenWord.replace(/./g, '<span class="dashes">_</span>');
+  let displayItem = chosenWord.replace(/./g, '<span class=dashes">_ </span>');
 
   userInputSection.innerHTML = displayItem;
 };
-
-const blocker = () => {
-  let optionsButtons = document.querySelectorAll(".options");
-  let letterButtons = document.querySelectorAll(".letters");
-  optionsButtons.forEach((button) => {
-    button.disabled = true;
-  });
-  letterButtons.forEach((button) => {
-    button.disabled = true;
-  });
-};
-
-// create alaphabet buttons
-for (let i = 65; i < 91; i = i + 1) {
-  let button = document.createElement("button");
-  button.classList.add("letters");
-  // number to ASCII
-  button.innerText = String.fromCharCode(i);
-  letterContainer.append(button);
-}
 
 //Initial Function (Called when page loads/user presses new game)
 const initializer = () => {
   winCount = 0;
   count = 0;
+
+  userInputSection.innerHTML = "";
+  optionsContainer.innerHTML = "";
+  letterContainer.classList.add("hide");
+  newGameContainer.classList.add("hide");
+  letterContainer.innerHTML = "";
+
+  for (let i = 65; i < 91; i = i + 1) {
+    let button = document.createElement("button");
+    button.classList.add("letters");
+    // number to ASCII
+    button.innerText = String.fromCharCode(i);
+    button.addEventListener("click", () => {
+      let charArray = chosenWord.split("")
+      let dashes = document.getElementsByClassName("dashes")
+      if(charArray.includes(button.innerText)){
+        charArray.forEach((char, index) => {
+          if(char === button.innerText){
+            dashes[index].innerText = char
+
+            winCount = winCount + 1
+            if(winCount == charArray.length){
+              resultText.innerHTML = `<h2 class="win-msg">You Win!</h2><p>The word was <span>${chosenWord}</span></p>`
+            }
+          }
+          blocker()
+        })
+      }
+    })
+    letterContainer.append(button);
+  }
   displayOptions();
 };
 

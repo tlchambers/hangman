@@ -49,7 +49,7 @@ const generateWord = (optionValue) => {
       button.classList.add("active");
     }
     button.disabled = true;
-  }); 
+  });
 
   // initially hides all the letter buttons, clear previous words
   letterContainer.classList.remove("hide");
@@ -59,6 +59,11 @@ const generateWord = (optionValue) => {
   chosenWord = optionArray[Math.floor(Math.random() * optionArray.length)];
   chosenWord = chosenWord.toUpperCase();
   console.log(chosenWord);
+
+  // replace every letter with span containing dash
+  let displayItem = chosenWord.replace(/./g, '<span class="dashes">_</span>');
+
+  userInputSection.innerHTML = displayItem;
 };
 
 const blocker = () => {
@@ -71,8 +76,6 @@ const blocker = () => {
     button.disabled = true;
   });
 };
-
-
 
 // create alaphabet buttons
 for (let i = 65; i < 91; i = i + 1) {

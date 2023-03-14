@@ -1,6 +1,6 @@
 const letterContainer = document.getElementById("letter-container");
 const optionsContainer = document.getElementById("options-container");
-const userInputSection = document.getElementById("user-input-container");
+const userInputSection = document.getElementById("user-input-section");
 const newGameContainer = document.getElementById("new-game-container");
 const newGameButton = document.getElementById("new-game-button");
 const canvas = document.getElementById("canvas");
@@ -49,18 +49,39 @@ const generateWord = (optionValue) => {
       button.classList.add("active");
     }
     button.disabled = true;
+  }); 
+
+  // initially hides all the letter buttons, clear previous words
+  letterContainer.classList.remove("hide");
+  userInputSection.innerText = "";
+
+  let optionArray = options[optionValue];
+  chosenWord = optionArray[Math.floor(Math.random() * optionArray.length)];
+  chosenWord = chosenWord.toUpperCase();
+  console.log(chosenWord);
+};
+
+const blocker = () => {
+  let optionsButtons = document.querySelectorAll(".options");
+  let letterButtons = document.querySelectorAll(".letters");
+  optionsButtons.forEach((button) => {
+    button.disabled = true;
+  });
+  letterButtons.forEach((button) => {
+    button.disabled = true;
   });
 };
+
+
 
 // create alaphabet buttons
 for (let i = 65; i < 91; i = i + 1) {
   let button = document.createElement("button");
   button.classList.add("letters");
-  // number to ASCII 
+  // number to ASCII
   button.innerText = String.fromCharCode(i);
   letterContainer.append(button);
 }
-
 
 //Initial Function (Called when page loads/user presses new game)
 const initializer = () => {

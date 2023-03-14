@@ -33,10 +33,10 @@ let chosenWord = "";
 
 //Display option buttons
 const displayOptions = () => {
-  optionsContainer.innerHTML += `<h3>Please Select An Option</h3>`;
+  optionsContainer.innerHTML = optionsContainer.innerHTML + `<h3>Please Select An Option</h3>`;
   let buttonCon = document.createElement("div");
   for (let value in options) {
-    buttonCon.innerHTML += `<button class="options" onclick="generateWord('${value}')">${value}</button>`;
+    buttonCon.innerHTML =  buttonCon.innerHTML + `<button class="options" onclick="generateWord('${value}')">${value}</button>`;
   }
   optionsContainer.appendChild(buttonCon);
 };
@@ -47,8 +47,9 @@ const blocker = () => {
   optionsButtons.forEach((button) => {
     button.disabled = true;
   });
+  
   letterButtons.forEach((button) => {
-    button.disabled = true;
+    button.disabled.true;
   });
   newGameContainer.classList.remove("hide")
 };
@@ -73,7 +74,7 @@ const generateWord = (optionValue) => {
   console.log(chosenWord);
 
   // replace every letter with span containing dash
-  let displayItem = chosenWord.replace(/./g, '<span class=dashes">_ </span>');
+  let displayItem = chosenWord.replace(/./g, '<span class="dashes">_ </span>');
 
   userInputSection.innerHTML = displayItem;
 };
@@ -94,15 +95,17 @@ const initializer = () => {
     button.classList.add("letters");
     // number to ASCII
     button.innerText = String.fromCharCode(i);
+
     button.addEventListener("click", () => {
       let charArray = chosenWord.split("")
       let dashes = document.getElementsByClassName("dashes")
       if(charArray.includes(button.innerText)){
         charArray.forEach((char, index) => {
           if(char === button.innerText){
-            dashes[index].innerText = char
-
+            dashes[index].innerText = char;
+            
             winCount = winCount + 1
+
             if(winCount == charArray.length){
               resultText.innerHTML = `<h2 class="win-msg">You Win!</h2><p>The word was <span>${chosenWord}</span></p>`
             }

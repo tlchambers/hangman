@@ -52,6 +52,14 @@ const generateWord = (optionValue) => {
   });
 };
 
+// create alaphabet buttons
+for (let i = 65; i < 91; i = i + 1) {
+  let button = document.createElement("button");
+  button.classList.add("letters");
+  // number to ASCII 
+  button.innerText = String.fromCharCode(i);
+  letterContainer.append(button);
+}
 
 
 //Initial Function (Called when page loads/user presses new game)

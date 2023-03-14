@@ -20,7 +20,7 @@ background-color: #f4c531;
   border-radius: 0.6em;
   box-shadow: 0 1.2em 2.4em rgba(111, 85, 0, 0.25);
 }
-#option-container{
+#options-container{
   text-align: center;
 }
 #options-container div {
@@ -74,9 +74,6 @@ justify-content: center;
 flex-direction: column;
 border-radius: 0.6em;
 }
-.hide{
-  display: none;
-}
 #user-input-section{
   /* display: flex; */
   justify-content: center;
@@ -89,6 +86,9 @@ canvas{
   margin: auto;
   border: 3px solid #f6c629;
   border-radius: 10px;
+}
+.hide{
+  display: none;
 }
 #result-text h2 {
   font-size: 1.8em;
